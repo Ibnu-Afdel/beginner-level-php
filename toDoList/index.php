@@ -14,23 +14,36 @@
     </form>
 
     <?php
-    $tasks = [];
+    $file = __DIR__ . '/tasks.txt';
 
-    if (isset($_POST['add_task'])) {
-        $task = $_POST['task'];
+    if (!file_exists($file)) {
+        file_put_contents($file, ''); 
+    }
+
+    $tasks = file($file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_task'])) {
+        $task = trim($_POST['task']); 
         if (!empty($task)) {
-            $tasks[] = $task;
+            file_put_contents($file, $task . PHP_EOL, FILE_APPEND | LOCK_EX); 
+            header("Location: " . $_SERVER['PHP_SELF']); 
+            exit;
         }
     }
 
     if (!empty($tasks)) {
         echo "<h2>Your Todo List:</h2>";
         echo "<ul>";
-        foreach ($tasks as $key => $task) {
-            echo "<li>$task</li>";
+        foreach ($tasks as $task) {
+            echo "<li>" . htmlspecialchars($task) . "</li>";
         }
         echo "</ul>";
+    } else {
+        echo "<p>No tasks yet. Add your first task above!</p>";
     }
     ?>
 </body>
 </html>
+
+<!-- run the followinf code to make it work.. its not working to create by itself currentlly -->
+<!-- chmod 666 tasks.txt -->
