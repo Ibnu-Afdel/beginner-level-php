@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PHP Todo List</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="container">
     <h1>My PHP Todo List</h1>
 
     <form method="POST">
@@ -59,8 +61,8 @@
         foreach ($tasks as $key => $task) {
             echo "<li>";
             echo htmlspecialchars($task);
-            echo " <a href='?delete=$key' style='color: red;'>[Delete]</a>";
-            echo " <a href='?edit=$key' style='color: blue;'>[Edit]</a>";
+            echo " <a href='?delete=$key'>Delete</a>";
+            echo " <a href='?edit=$key' >Edit</a>";
             echo "</li>";
         }
         echo "</ul>";
@@ -83,6 +85,7 @@
         }
     }
     ?>
+    </div>
 </body>
 </html>
 
