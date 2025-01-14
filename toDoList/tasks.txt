@@ -1,3 +1,0 @@
-here is a text from tasks.txt, remove it manually
-
-it is here since auto creation might not work
