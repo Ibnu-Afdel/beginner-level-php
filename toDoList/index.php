@@ -1,3 +1,4 @@
+<!-- reading the comment at the buttom is appreatiated -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -89,5 +90,15 @@
 </body>
 </html>
 
-<!-- run the followinf code to make it work.. its not working to create by itself currentlly -->
+<!--
+if you encounter error in which the todos are not beign persisten
+or / which means the tasks.txt file is not being created automatically then
+first create 'tasks.txt' then  
+-->
+
+<!-- 
+run the following if you have authority issue.. in other word, even width
+the file created its not being written
+-->
+
 <!-- chmod 666 tasks.txt -->
