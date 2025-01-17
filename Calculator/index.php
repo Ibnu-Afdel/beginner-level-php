@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>myPHP | Calculator</title>
+    <title>PHP|Calculator</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h1>PHP Calculator</h1>
+        <h1>My simple PHP Calculator</h1>
         <form method="POST">
             <label for="num1">Number 1:</label>
-            <input type="number" name="num1" id="num1" required>
+            <input type="number" name="num1" id="num1" placeholder="type number"required>
 
             <label for="num2">Number 2:</label>
-            <input type="number" name="num2" id="num2" required>
+            <input type="number" name="num2" id="num2"  placeholder="type number" required>
 
             <label for="operation">Select Operation:</label>
             <select name="operation" id="operation">
