@@ -41,8 +41,6 @@ if ($responseSahih !== false && $responseAmharic !== false) {
         $ayahNumberSahih = $dataSahih['data']['numberInSurah'];
 
         $ayahTextAmharic = $dataAmharic['data']['text'];
-        $surahNameAmharic = $dataAmharic['data']['surah']['englishName'];
-        $ayahNumberAmharic = $dataAmharic['data']['numberInSurah'];
 
         echo "<h1>Random Quranic Verse</h1>";
         echo "<h2>Sahih International (English):</h2>";
@@ -51,8 +49,6 @@ if ($responseSahih !== false && $responseAmharic !== false) {
         echo "<p><strong>Translation (Sahih International):</strong> $ayahTextSahih</p>";
 
         echo "<h2>Amharic Translation:</h2>";
-        echo "<p><strong>Surah:</strong> $surahNameAmharic</p>";
-        echo "<p><strong>Ayah Number:</strong> $ayahNumberAmharic</p>";
         echo "<p><strong>Translation (Amharic):</strong> $ayahTextAmharic</p>";
 
     } else {
