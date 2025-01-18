@@ -3,27 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Random Quote Generator</title>
+    <title>Random Quranic Verse</title>
 </head>
 <body>
     <?php
-    $quotes = [
-        ["quote" => "The only way to do great work is to love what you do.", "author" => "Steve Jobs"],
-        ["quote" => "Success is not the key to happiness. Happiness is the key to success.", "author" => "Albert Schweitzer"],
-        ["quote" => "Don't watch the clock; do what it does. Keep going.", "author" => "Sam Levenson"],
-        ["quote" => "Keep your face always toward the sunshine—and shadows will fall behind you.", "author" => "Walt Whitman"],
-        ["quote" => "Believe you can and you're halfway there.", "author" => "Theodore Roosevelt"]
-    ];
+    $apiUrl = "https://api.alquran.cloud/v1/ayah/random/en.sahih";
 
-    $randomIndex = array_rand($quotes);
-    $randomQuote = $quotes[$randomIndex];
+    $response = file_get_contents($apiUrl);
+
+    if ($response !== false) {
+        $data = json_decode($response, true);
+
+        if ($data['status'] === "OK") {
+            $ayahText = $data['data']['text'];
+            $surahName = $data['data']['surah']['englishName'];
+            $ayahNumber = $data['data']['numberInSurah'];
+
+            echo "<h1>Random Quranic Verse </h1>";
+            echo "<h2>Sahih International Translation</h2>";
+            echo "<p><strong>Surah:</strong> $surahName</p>";
+            echo "<p><strong>Ayah Number:</strong> $ayahNumber</p>";
+            echo "<p><strong>Translation:</strong> $ayahText</p>";
+        } else {
+            echo "<p>Error: Unable to retrieve the Ayah. Please try again later.</p>";
+        }
+    } else {
+        echo "<p>Error: Unable to connect to the API. Please check your internet connection.</p>";
+    }
     ?>
-    <div>
-        <div>"<?php echo $randomQuote['quote']; ?>"</div>
-        <div>- <?php echo $randomQuote['author']; ?></div>
-    </div>
-    <form method="post">
-        <button type="submit">Get Random Quote</button>
-    </form>
 </body>
 </html>
