@@ -7,7 +7,7 @@
 </head>
 <body>
     <?php
-    $apiUrl = "https://api.alquran.cloud/v1/ayah/random/en.sahih";
+    $apiUrl = "https://api.alquran.cloud/v1/ayah/" . rand(1, 6236) . "/en.sahih"; // Random Ayah from the Quran
 
     $response = file_get_contents($apiUrl);
 
