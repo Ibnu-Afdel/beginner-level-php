@@ -6,14 +6,33 @@
 
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f4fdf5; 
+    background-color: #f4fdf5;
     color: #333;
     line-height: 1.6;
     padding: 20px;
 }
 
+header {
+    background-color: #e9f7e7; 
+    padding: 20px 0;
+    text-align: center;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: #4caf50;
+}
+
+header p {
+    font-size: 1.2rem;
+    color: #555;
+}
+
 .container {
-    max-width: 800px;
+    max-width: 900px;
     margin: 0 auto;
     padding: 20px;
     background-color: #fff;
@@ -21,61 +40,80 @@ body {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-h1 {
-    font-size: 2.5em;
-    color: #4caf50; 
-    margin-bottom: 20px;
-    text-align: center;
+.verse-container,
+.translation-container {
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: #e9f7e7;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: left;
 }
 
 h2 {
-    font-size: 1.8em;
-    color: #333;
-    margin: 10px 0;
-}
-
-p {
-    font-size: 1.1em;
+    font-size: 1.8rem;
+    color: #4caf50;
     margin-bottom: 15px;
 }
 
+p {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+.action-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
 button {
-    background-color: #4caf50; 
+    background-color: #4caf50;
     color: white;
-    padding: 10px 20px;
-    font-size: 1em;
+    padding: 12px 25px;
+    font-size: 1rem;
     border: none;
-    border-radius: 4px;
+    border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
     margin: 5px;
 }
 
 button:hover {
-    background-color: #45a049; 
+    background-color: #45a049;
 }
 
-form {
-    display: flex;
-    justify-content: center;
+.disclaimer {
     margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #fdf6d8; 
+    border-radius: 8px;
+    text-align: center;
 }
 
-form button {
-    margin-left: 10px;
+.disclaimer p {
+    font-size: 1rem;
+    color: #555;
 }
 
-.translation-container {
-    background-color: #e9f7e7; 
-    padding: 20px;
-    border-radius: 6px;
-    margin-top: 20px;
-}
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
 
-.translation-container p {
-    font-size: 1.2em;
-}
+    header h1 {
+        font-size: 2rem;
+    }
 
-.translation-container h2 {
-    margin-top: 0;
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    p {
+        font-size: 1rem;
+    }
+
+    button {
+        font-size: 0.9rem;
+        padding: 10px 20px;
+    }
 }
