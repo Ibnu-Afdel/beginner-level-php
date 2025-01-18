@@ -3,27 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Random Quranic Verse</title>
+    <title>Random Quranic Verse (Sahih International & Amharic)</title>
 </head>
 <body>
     <?php
-    $apiUrl = "https://api.alquran.cloud/v1/ayah/" . rand(1, 6236) . "/en.sahih"; // Random Ayah from the Quran
+    $randomAyah = rand(1, 6236);
 
-    $response = file_get_contents($apiUrl);
+    $apiUrlSahih = "https://api.alquran.cloud/v1/ayah/{$randomAyah}/en.sahih";
 
-    if ($response !== false) {
-        $data = json_decode($response, true);
+    $apiUrlAmharic = "https://api.alquran.cloud/v1/ayah/{$randomAyah}/am.sadiq";
 
-        if ($data['status'] === "OK") {
-            $ayahText = $data['data']['text'];
-            $surahName = $data['data']['surah']['englishName'];
-            $ayahNumber = $data['data']['numberInSurah'];
+    $responseSahih = file_get_contents($apiUrlSahih);
 
-            echo "<h1>Random Quranic Verse </h1>";
-            echo "<h2>Sahih International Translation</h2>";
-            echo "<p><strong>Surah:</strong> $surahName</p>";
-            echo "<p><strong>Ayah Number:</strong> $ayahNumber</p>";
-            echo "<p><strong>Translation:</strong> $ayahText</p>";
+    $responseAmharic = file_get_contents($apiUrlAmharic);
+
+    if ($responseSahih !== false && $responseAmharic !== false) {
+        $dataSahih = json_decode($responseSahih, true);
+        $dataAmharic = json_decode($responseAmharic, true);
+
+        if ($dataSahih['status'] === "OK" && $dataAmharic['status'] === "OK") {
+            $ayahTextSahih = $dataSahih['data']['text'];
+            $surahNameSahih = $dataSahih['data']['surah']['englishName'];
+            $ayahNumberSahih = $dataSahih['data']['numberInSurah'];
+
+            $ayahTextAmharic = $dataAmharic['data']['text'];
+            $surahNameAmharic = $dataAmharic['data']['surah']['englishName'];
+            $ayahNumberAmharic = $dataAmharic['data']['numberInSurah'];
+
+            echo "<h1>Random Quranic Verse</h1>";
+            echo "<h2>Sahih International (English):</h2>";
+            echo "<p><strong>Surah:</strong> $surahNameSahih</p>";
+            echo "<p><strong>Ayah Number:</strong> $ayahNumberSahih</p>";
+            echo "<p><strong>Translation (Sahih International):</strong> $ayahTextSahih</p>";
+
+            echo "<h2>Amharic Translation:</h2>";
+            echo "<p><strong>Surah:</strong> $surahNameAmharic</p>";
+            echo "<p><strong>Ayah Number:</strong> $ayahNumberAmharic</p>";
+            echo "<p><strong>Translation (Amharic):</strong> $ayahTextAmharic</p>";
         } else {
             echo "<p>Error: Unable to retrieve the Ayah. Please try again later.</p>";
         }
