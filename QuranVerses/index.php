@@ -65,13 +65,13 @@ if ($responseSahih !== false && $responseAmharic !== false) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Random Quranic Verse</title>
+    <title>Quran Verse</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
         <div class="container">
-            <h1>Quranic Verse Explorer</h1>
+            <h1>Quran Verse Explorer</h1>
             <p>Discover random Quranic verses with translations in English and Amharic.</p>
         </div>
     </header>
