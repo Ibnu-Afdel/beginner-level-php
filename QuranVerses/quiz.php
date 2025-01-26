@@ -50,15 +50,42 @@ shuffle($options);
 // Handle user guess
 if (isset($_POST['submit_guess'])) {
     $userGuess = $_POST['surah_name'];
-    if ($userGuess === $_SESSION['correct_answer']) {
+
+    // Store previous Ayah details for validation
+    $previousAyahText = $_SESSION['ayah_text'];
+    $previousCorrectAnswer = $_SESSION['correct_answer'];
+    $previousAyahNumber = $_SESSION['ayah_number'];
+
+    // Validate the user's guess against the previous Ayah
+    if ($userGuess === $previousCorrectAnswer) {
         $_SESSION['score'] += 1;
         $resultMessage = "<p class='result-message correct'>Correct! +1 point.</p>";
     } else {
-        $resultMessage = "<p class='result-message incorrect'>Incorrect! The correct answer was: <strong>{$_SESSION['correct_answer']}</strong>.</p>";
+        $resultMessage = "
+            <p class='result-message incorrect'>
+                Incorrect!<br>
+                <strong>Your Answer:</strong> $userGuess<br>
+                <strong>Correct Answer:</strong> $previousCorrectAnswer (Ayah $previousAyahNumber)<br>
+                <strong>Ayah Text:</strong> $previousAyahText
+            </p>";
     }
 
     // Generate a new Ayah for the next round
     $_SESSION['current_ayah'] = rand(1, 6236);
+
+    // Fetch new Ayah details
+    $newAyah = $_SESSION['current_ayah'];
+    $newApiUrlSahih = "https://api.alquran.cloud/v1/ayah/{$newAyah}/en.sahih";
+    $newResponseSahih = file_get_contents($newApiUrlSahih);
+
+    if ($newResponseSahih !== false) {
+        $newDataSahih = json_decode($newResponseSahih, true);
+        if ($newDataSahih['status'] === "OK") {
+            $_SESSION['ayah_text'] = $newDataSahih['data']['text'];
+            $_SESSION['correct_answer'] = $newDataSahih['data']['surah']['englishName'];
+            $_SESSION['ayah_number'] = $newDataSahih['data']['numberInSurah'];
+        }
+    }
 }
 ?>
 
