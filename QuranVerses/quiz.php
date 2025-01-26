@@ -38,7 +38,7 @@ if ($responseSahih !== false) {
 }
 
 // Select 4 random Surahs (including the correct one)
-$options = [$_SESSION['correct_answer']];
+$options = [$_SESSION['correct_answer']]; // Always include the correct answer
 while (count($options) < 4) {
     $randomSurah = $allSurahNames[array_rand($allSurahNames)];
     if (!in_array($randomSurah, $options)) {
@@ -59,7 +59,13 @@ if (isset($_POST['submit_guess'])) {
     // Validate the user's guess against the previous Ayah
     if ($userGuess === $previousCorrectAnswer) {
         $_SESSION['score'] += 1;
-        $resultMessage = "<p class='result-message correct'>Correct! +1 point.</p>";
+        $resultMessage = "
+            <p class='result-message correct'>
+                Correct! +1 point.<br>
+                <strong>Your Answer:</strong> $userGuess<br>
+                <strong>Correct Answer:</strong> $previousCorrectAnswer (Ayah $previousAyahNumber)<br>
+                <strong>Ayah Text:</strong> $previousAyahText
+            </p>";
     } else {
         $resultMessage = "
             <p class='result-message incorrect'>
@@ -86,6 +92,16 @@ if (isset($_POST['submit_guess'])) {
             $_SESSION['ayah_number'] = $newDataSahih['data']['numberInSurah'];
         }
     }
+
+    // Regenerate options for the new Ayah
+    $options = [$_SESSION['correct_answer']]; // Always include the correct answer
+    while (count($options) < 4) {
+        $randomSurah = $allSurahNames[array_rand($allSurahNames)];
+        if (!in_array($randomSurah, $options)) {
+            $options[] = $randomSurah;
+        }
+    }
+    shuffle($options);
 }
 ?>
 
