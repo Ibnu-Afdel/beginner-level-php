@@ -92,7 +92,7 @@ if ($responseSahih !== false && $responseAmharic !== false) {
 
     <section class="disclaimer">
         <div class="container">
-            <p>Please read with caution. If there are any mistakes, feel free to contact me at <strong>your_email@example.com</strong>.</p>
+            <p>Please read with caution. If there are any mistakes, feel free to contact me at <strong>ibnuafdel@gmail.com</strong>.</p>
         </div>
     </section>
 </body>
