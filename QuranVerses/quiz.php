@@ -48,7 +48,7 @@ while (count($options) < 4) {
 shuffle($options);
 
 // Handle user guess
-if (isset($_POST['submit_guess'])) {
+if (isset($_POST['surah_name'])) {
     $userGuess = $_POST['surah_name'];
 
     // Store previous Ayah details for validation
@@ -112,12 +112,19 @@ if (isset($_POST['submit_guess'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quran Quiz</title>
     <link rel="stylesheet" href="style.css">
+    <script>
+        // Auto-submit the form when a choice is selected
+        function autoSubmit() {
+            document.getElementById('quizForm').submit();
+        }
+    </script>
 </head>
 <body>
     <header>
         <div class="container">
             <h1>Quran Quiz</h1>
             <p>Test your knowledge of the Quran!</p>
+            <a href="index.php" class="back-button">Back to Home</a>
         </div>
     </header>
 
@@ -126,17 +133,15 @@ if (isset($_POST['submit_guess'])) {
             <div class="game-container">
                 <h2>Guess the Surah</h2>
                 <p><strong>Ayah Text:</strong> <?= $_SESSION['ayah_text']; ?></p>
-                <form method="POST">
+                <form method="POST" id="quizForm">
                     <label for="surah_name">Select Surah:</label>
                     <div class="options">
                         <?php foreach ($options as $option): ?>
                             <label>
-                                <input type="radio" name="surah_name" value="<?= $option; ?>" required> <?= $option; ?>
+                                <input type="radio" name="surah_name" value="<?= $option; ?>" required onclick="autoSubmit()"> <?= $option; ?>
                             </label><br>
                         <?php endforeach; ?>
                     </div>
-                    <br>
-                    <button type="submit" name="submit_guess">Submit Guess</button>
                 </form>
                 <?= $resultMessage ?? ''; ?>
                 <p class="score"><strong>Your Score:</strong> <?= $_SESSION['score']; ?></p>
